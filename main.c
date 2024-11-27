@@ -29,11 +29,18 @@ int main(int argc, char* argv[])
 		printf("Неверный формат ввода.\n");
 		exit(1);
 	}
+
 	int sz = 2;
 	int* answers = (int*) malloc(sz * sizeof(int));
 	int size = 0;
 	int flag = 1;
 
+	if ((argc - 1) % 3 != 2)
+	{
+		printf("Неверный формат ввода.\n");
+		exit(1);
+	}
+	
 	for (int i = 1; i < argc; i += 3)
 	{
 		if (argv[i][0] == '-' && is_flag_correct(argv[i]) == 1)
@@ -46,6 +53,14 @@ int main(int argc, char* argv[])
 			char oper;
 			int num_a;
 			int num_b;
+
+			if (argv[i + 1][1])
+			{
+				printf("Недопустимый символ операции.\n");
+				exit(1);
+			}
+
+			
 			oper = argv[i + 1][0];
 			num_a = atoi(argv[i]);
 			num_b = atoi(argv[i + 2]);
@@ -63,7 +78,7 @@ int main(int argc, char* argv[])
 
 	int key;
 	key = atoi(argv[argc - 1]);
-
+	
 	char res_str[size];
 
 	for (int i = 0; i < size; i++)
