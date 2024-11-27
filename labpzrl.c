@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include "labpzrl.h"
 
 void print_int_mass(int mass[], int size)
@@ -18,6 +19,27 @@ void print_char_mass(char mass[], int size)
 		printf("%c", mass[i]);
 	}
 	printf("\n");
+}
+
+int is_decimal(char* str)
+{
+	if (!str || !*str) 
+	{
+		return 0;
+	}
+	if (*str == '-' || *str == '+')
+	{
+		str++;
+	}
+	while (*str)
+	{
+		if (!isdigit((unsigned char) *str))
+		{
+			return 0;
+		}
+		str++;
+	}
+	return 1;
 }
 
 int operation(int a, char n, int b)

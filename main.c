@@ -43,7 +43,7 @@ int main(int argc, char* argv[])
 	
 	for (int i = 1; i < argc; i += 3)
 	{
-		if (argv[i][0] == '-' && is_flag_correct(argv[i]) == 1)
+		if ((is_decimal(argv[i]) != 1 && argv[i][0] == '-') && is_flag_correct(argv[i]) == 1)
 		{
 			flag = 0;
 			break;
@@ -60,10 +60,17 @@ int main(int argc, char* argv[])
 				exit(1);
 			}
 
-			
-			oper = argv[i + 1][0];
-			num_a = atoi(argv[i]);
-			num_b = atoi(argv[i + 2]);
+			if (is_decimal(argv[i]) && is_decimal(argv[i + 2]))
+			{
+				oper = argv[i + 1][0];
+				num_a = atoi(argv[i]);
+				num_b = atoi(argv[i + 2]);
+			}
+			else
+			{
+				printf("Неверный формат ввода.\n");
+        		exit(1);
+			}
 
 			// printf("%d %c %d\n", num_a, oper, num_b);
 
@@ -77,7 +84,16 @@ int main(int argc, char* argv[])
 	}
 
 	int key;
-	key = atoi(argv[argc - 1]);
+
+	if (is_decimal(argv[argc - 1]))
+	{
+		key = atoi(argv[argc - 1]);
+	}
+	else
+	{
+		printf("Неверный ключ дешифрования.\n");
+        exit(1);
+	}
 	
 	char res_str[size];
 
