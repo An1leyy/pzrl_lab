@@ -10,7 +10,7 @@ $(name): $(objects)
 	gcc -c $< -o $@
 
 clean:
-	rm $(name) $(objects)
+	rm -f $(name) $(objects)
 
 run:
 	./$(name) $(input)
